@@ -2,12 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Events\UserCreated;
+use App\Events\NotificationCreated;
 use App\Models\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
-class UserNotification
+class NotificationCreatedListener
 {
     /**
      * Create the event listener.
@@ -22,10 +20,10 @@ class UserNotification
     /**
      * Handle the event.
      *
-     * @param  UserCreated  $event
+     * @param  NotificationCreatedListener  $event
      * @return void
      */
-    public function handle(UserCreated $event)
+    public function handle(NotificationCreated $event)
     {
         // $user = $event->user;
         // $notification = new Notification();

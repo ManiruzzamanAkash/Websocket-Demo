@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -12,19 +13,19 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserCreated implements ShouldBroadcastNow
+class NotificationCreated implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $user;
+    public $notification;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(Notification $notification)
     {
-        $this->user = $user;
+        $this->notification = $notification;
     }
 
     /**
@@ -34,6 +35,6 @@ class UserCreated implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new Channel('user.created');
+        return new Channel('notification.created');
     }
 }
