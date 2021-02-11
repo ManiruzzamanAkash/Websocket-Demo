@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
-Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
-    return true;
-});
+// Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
+//     return true;
+// });
 
 Broadcast::channel('private-user.created', function () {
     return true;

@@ -33,6 +33,6 @@ class UserNotification
         $notification->message = "New User Created named - ".$user->name;
         $notification->seen = 0;
         $notification->save();
-        return $notification;
+        // return $notification;
     }
 }
