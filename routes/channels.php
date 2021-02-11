@@ -17,6 +17,6 @@ use Illuminate\Support\Facades\Broadcast;
 //     return true;
 // });
 
-Broadcast::channel('private-user.created', function () {
-    return true;
-});
+// Broadcast::channel('private-user.created', function () {
+//     return true;
+// });

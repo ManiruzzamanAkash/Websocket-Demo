@@ -33,6 +33,6 @@ class UserCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('user.created');
+        return new Channel('user.created');
     }
 }

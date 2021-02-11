@@ -432,7 +432,7 @@
         //         console.log('Notification', e);
         //     });
 
-        window.Echo.channel('private-user.created')
+        window.Echo.channel('user.created')
             .listen('UserCreated', (e) => {
                 console.log('User Created: ', e)
             })
