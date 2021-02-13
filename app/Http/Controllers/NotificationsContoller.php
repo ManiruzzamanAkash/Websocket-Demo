@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Hash;
 
 class NotificationsContoller extends Controller
 {
+    public function index()
+    {
+        return Notification::orderBy('id', 'desc')
+        ->where('seen', false)
+        ->get();
+    }
+
     public function store(Request $request)
     {
         $request->validate([
