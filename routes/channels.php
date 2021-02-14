@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Message;
+use App\Models\User;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -20,3 +22,7 @@ use Illuminate\Support\Facades\Broadcast;
 // Broadcast::channel('private-user.created', function () {
 //     return true;
 // });
+
+Broadcast::channel('message.{sender_id}.{receiver_id}', function ($user, $sender_id, $receiver_id) {
+    return $user->id === (User::find($sender_id)->id || User::find($receiver_id)->id);
+});

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\NotificationsContoller;
 use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
@@ -28,3 +29,5 @@ Route::get('users-list', [UsersController::class, 'index']);
 Route::post('users-create', [UsersController::class, 'store']);
 Route::get('notifications', [NotificationsContoller::class, 'index']);
 Route::post('notification-create', [NotificationsContoller::class, 'store']);
+
+Route::apiResource('chats', ChatsController::class);

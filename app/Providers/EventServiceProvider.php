@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\MessageSendEvent;
 use App\Events\NotificationCreated;
 use App\Events\UserCreated;
+use App\Listeners\MessageSendNotification;
 use App\Listeners\NotificationCreatedListener;
 use App\Listeners\UserNotification;
 use Illuminate\Auth\Events\Registered;
@@ -41,6 +43,11 @@ class EventServiceProvider extends ServiceProvider
         Event::listen(
             NotificationCreated::class,
             [NotificationCreatedListener::class, 'handle']
+        );
+
+        Event::listen(
+            MessageSendEvent::class,
+            [MessageSendNotification::class, 'handle']
         );
     }
 }
