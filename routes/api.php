@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\NotificationsContoller;
 use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
@@ -21,6 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
 Route::post('users-create', [UsersController::class, 'store']);
 Route::get('notifications', [NotificationsContoller::class, 'index']);
 Route::post('notification-create', [NotificationsContoller::class, 'store']);
