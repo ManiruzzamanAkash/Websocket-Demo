@@ -13,9 +13,24 @@ class ChatsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $user = $request->user();
+        $request->validate([
+            'receiver_id' => 'required|numeric'
+        ]);
+        if (is_null($user))  return response(['status' => false, 'message' => 'Un authorized to send message']);
+
+        $sent_messages = Message::where('sender_id', $user->id)
+            ->where('receiver_id', $request->receiver_id)
+            ->get();
+        $received_messages = Message::where('receiver_id', $user->id)
+            ->where('sender_id', $request->receiver_id)
+            ->get();
+
+        $merged = $sent_messages->merge($received_messages);
+        $messages = $merged->all();
+        return $messages;
     }
 
     /**
