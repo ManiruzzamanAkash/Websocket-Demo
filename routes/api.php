@@ -24,6 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+Route::get('users-list', [UsersController::class, 'index']);
 Route::post('users-create', [UsersController::class, 'store']);
 Route::get('notifications', [NotificationsContoller::class, 'index']);
 Route::post('notification-create', [NotificationsContoller::class, 'store']);

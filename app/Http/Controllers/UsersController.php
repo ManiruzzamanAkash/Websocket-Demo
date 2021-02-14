@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
+    public function index()
+    {
+        return User::orderBy('id')->get();
+    }
+
     public function store(Request $request)
     {
         $request->validate([
