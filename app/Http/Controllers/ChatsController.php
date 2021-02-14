@@ -19,19 +19,48 @@ class ChatsController extends Controller
         $request->validate([
             'receiver_id' => 'required|numeric'
         ]);
+
         if (is_null($user))  return response(['status' => false, 'message' => 'Un authorized to send message']);
+
+        // $all_messages = Message::where(function($request, $query, $user) {
+        //     $query->where('receiver_id', $request->receiver_id)
+        //           ->orWhere('sender_id', $user->id);
+        // })
+        // ->where(function($request, $query, $user) {
+        //     $query->where('sender_id', $request->receiver_id)
+        //           ->where('receiver_id', $user->id);
+        // })
+        // ->orderBy('id', 'desc')
+        // ->get();
 
         $sent_messages = Message::where('sender_id', $user->id)
             ->where('receiver_id', $request->receiver_id)
+            ->orderBy('id', 'desc')
             ->get();
         $received_messages = Message::where('receiver_id', $user->id)
             ->where('sender_id', $request->receiver_id)
+            ->orderBy('id', 'desc')
             ->get();
 
         $merged = $sent_messages->merge($received_messages);
-        $messages = $merged->all();
+        $messages = collect($merged->all());
+        // $x = $messages->toArray();
+        // usort($x, function ($v1, $v2) {
+        //     return strcmp($v1['id'], $v2['id']);
+        // });
+
+        // $sorted = $messages->map(function($id) use($messagesNew) {
+        //     return $messagesNew->where('id', $id)->first();
+        // });
+
         return $messages;
     }
+
+    public function cmp($a, $b)
+    {
+        return strcmp($a["id"], $b["id"]);
+    }
+
 
     /**
      * Store a newly created resource in storage.
